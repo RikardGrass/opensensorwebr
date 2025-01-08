@@ -38,8 +38,6 @@ library(plotly) # interactive plots (optional)
 <!-- end list -->
 
 ``` r
-# an LFULG Station in Leipzig
-
 ## List Available Sensors
 opensensorwebr::availablesensors("https://api.opensensorweb.de/v1/organizations/pikobytes/networks/LUFTGUETE_LFULG", my.device = "DESN025")
 
@@ -59,11 +57,12 @@ leipzig <- opensensorwebr::etmodeldata("https://api.opensensorweb.de/v1/organiza
 
 ## 3.1 Calculate Penman Monteight grass reference evaporation based on OpenSensorWeb-Data
 
-escription: Package Evapotranspiration Developers: Danlu Guo, Seth
-Westra Year First Available: 2014 E-mail: <Danlu.guo@adelaide.edu.au>
-Website:
-<http://cran.r-project.org/web/packages/Evapotranspiration/index.html>
-<file:///C:/Users/rgrass/Downloads/EVOPOTRANSPIRATION-1.pdf>
+  - The Package Evapotranspiration is developed by Danlu Guo and Seth
+    Westra (Year First Available: 2014, E-mail:
+    <Danlu.guo@adelaide.edu.au>, Website:
+    <http://cran.r-project.org/web/packages/Evapotranspiration/index.html>)
+
+<!-- end list -->
 
 ``` r
 # preprocess data for the package

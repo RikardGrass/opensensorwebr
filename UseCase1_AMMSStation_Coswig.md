@@ -34,28 +34,31 @@ library(plotly) # interactive plots (optional)
 
 ## 3.1 Description of the Station
 
-The Station ist situated in Coswig and maintained by
-Agrarmeteorologisches Messnetz Sachsen (AMMS).
+  - The Station ist situated in Coswig and maintained by
+    Agrarmeteorologisches Messnetz Sachsen (AMMS).
 
-Measurment url is similar to:
-“<https://api.opensensorweb.de/v1/organizations/pikobytes/networks/AMMS_WETTERDATEN/devices/S021/sensors/Luftfeuchtigkeit_200cm/measurements>”
+  - Measurment url is similar to:
+    “<https://api.opensensorweb.de/v1/organizations/pikobytes/networks/AMMS_WETTERDATEN/devices/S021/sensors/Luftfeuchtigkeit_200cm/measurements>”
 
-Data Source (copied from <https://www.opensensorweb.de>) -
-source\_shortname:“Agrarmeteorologisches Messnetz Sachsen (AMMS) -
-Wetterdaten”, - citation\_statement:“Data provided by: Sächsisches
-Landesamt für Umwelt, Landwirtschaft und Geologie. - Legal information:
-<https://www.umwelt.sachsen.de/umwelt/download/Nutzungshinweis_2012.pdf>”
-- modification\_statement:“Data conversions applied” -
-source\_logo\_url:“<https://www.landwirtschaft.sachsen.de/landwirtschaft/symbole/signet_sachsen.gif>”
-- source\_link\_uri:“<https://www.landwirtschaft.sachsen.de/Wetter09/>”
+  - Data Source (copied from <https://www.opensensorweb.de>)
+    
+      - source\_shortname:“Agrarmeteorologisches Messnetz Sachsen (AMMS)
+        - Wetterdaten”,
+      - citation\_statement:"Data provided by: Sächsisches Landesamt für
+        Umwelt, Landwirtschaft und Geologie.
+      - Legal information:
+        <https://www.umwelt.sachsen.de/umwelt/download/Nutzungshinweis_2012.pdf>"
+      - modification\_statement:“Data conversions applied”
+      - source\_logo\_url:“<https://www.landwirtschaft.sachsen.de/landwirtschaft/symbole/signet_sachsen.gif>”
+      - source\_link\_uri:“<https://www.landwirtschaft.sachsen.de/Wetter09/>”
 
-Additional information can be found in the api:
-<https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN/devices/S021/>
-**Koordinates:** 13.5363186, 51.1386678 Timezone: timezone
-“Europe/Berlin” –\> but output is UTC if request is in UTC-format
-
-  - Todo: insert functionality to transform wind speed measured in 2.5m
-    into 2m
+  - additional information
+    (<https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN/devices/S021/>)
+    
+      - Koordinates: 13.5363186, 51.1386678 (source: )
+      - Timezone: timezone “Europe/Berlin” (but data time stamp is given
+        in UTC-timestamp if request is in UTC-format used in this
+        package)
 
 <!-- end list -->
 
@@ -76,11 +79,12 @@ coswig <- opensensorwebr::etmodeldata("https://api.opensensorweb.de/v0/networks/
 
 ## 3.2 Calculate Penman Monteight grass reference evaporation based on OpenSensorWeb-Data
 
-escription: Package Evapotranspiration Developers: Danlu Guo, Seth
-Westra Year First Available: 2014 E-mail: <Danlu.guo@adelaide.edu.au>
-Website:
-<http://cran.r-project.org/web/packages/Evapotranspiration/index.html>
-<file:///C:/Users/rgrass/Downloads/EVOPOTRANSPIRATION-1.pdf>
+  - The Package Evapotranspiration is developed by Danlu Guo and Seth
+    Westra (Year First Available: 2014, E-mail:
+    <Danlu.guo@adelaide.edu.au>, Website:
+    <http://cran.r-project.org/web/packages/Evapotranspiration/index.html>)
+
+<!-- end list -->
 
 ``` r
 # preprocess data for the package

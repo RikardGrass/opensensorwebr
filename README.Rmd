@@ -20,9 +20,12 @@ knitr::opts_chunk$set(
   message=FALSE  # results = 'hide' option doesn't prevent other messages to be printed. To hide them like this, they will still be printed to console
 )
 ```
+
 # Description
 This package provides access to the OpenSensorWeb-API (api.opensensorweb.de) to create data sets for crop modelling. 
+
 # Usage
+
 ## Install Package
 ```{r, eval = FALSE}
 # This package is not yet on CRAN. The easiest way to get sapflowr is to install it via github:
@@ -43,7 +46,6 @@ install_github("RikardGrass/opensensorwebr", auth_token = "abcdefasdf")
 
 # pottentially you may also use the https link if you are logged into your github account at the same time (e.g. via www.github.de in our browser)
 ```
-
 
 ## load the package
 ```{r, eval = TRUE}
@@ -77,7 +79,3 @@ coswig <- opensensorwebr::etmodeldata("https://api.opensensorweb.de/v0/networks/
                                       write.RData = FALSE,
                                       write.csv = FALSE)
 ```
-
-## Getting help
-
-- contact: rikard.grass@ufz.de

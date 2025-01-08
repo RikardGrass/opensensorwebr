@@ -6,8 +6,11 @@ opensensorwebr
 # 1 Description
 
 This package provides access to the OpenSensorWeb-API
-(api.opensensorweb.de) to create data sets for crop modelling. \# Usage
-\#\# Install Package
+(api.opensensorweb.de) to create data sets for crop modelling.
+
+# 2 Usage
+
+## 2.1 Install Package
 
 ``` r
 # This package is not yet on CRAN. The easiest way to get sapflowr is to install it via github:
@@ -29,25 +32,25 @@ install_github("RikardGrass/opensensorwebr", auth_token = "abcdefasdf")
 # pottentially you may also use the https link if you are logged into your github account at the same time (e.g. via www.github.de in our browser)
 ```
 
-## 1.1 load the package
+## 2.2 load the package
 
 ``` r
 library(opensensorwebr)
 ```
 
-## 1.2 Get a listing of available sensors
+## 2.3 Get a listing of available sensors
 
 ``` r
 opensensorwebr::availablesensors("https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN", my.device = "S034")
 ```
 
-## 1.3 Get data for one sensor
+## 2.4 Get data for one sensor
 
 ``` r
 opensensorwebr::hourly(url = "https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN", my.device = "S021", my.sensor = "Niederschlag", aggregation = "MEAN", my.interval = 1000, my.startdate = "2015-09-18T00:00:00Z")
 ```
 
-## 1.4 Get a dataset to calculate evaportranspiration according to Penman Monteight
+## 2.5 Get a dataset to calculate evaportranspiration according to Penman Monteight
 
   - Todo: insert functionality to transform wind speed measured in 2.5m
     into 2m
@@ -68,7 +71,3 @@ coswig <- opensensorwebr::etmodeldata("https://api.opensensorweb.de/v0/networks/
                                       write.RData = FALSE,
                                       write.csv = FALSE)
 ```
-
-## 1.5 Getting help
-
-  - contact: <rikard.grass@ufz.de>
