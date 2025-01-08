@@ -48,14 +48,12 @@ library(plotly) # interactive plots (optional)
         Umwelt, Landwirtschaft und Geologie.
       - Legal information:
         <https://www.umwelt.sachsen.de/umwelt/download/Nutzungshinweis_2012.pdf>"
-      - modification\_statement:“Data conversions applied”
-      - source\_logo\_url:“<https://www.landwirtschaft.sachsen.de/landwirtschaft/symbole/signet_sachsen.gif>”
       - source\_link\_uri:“<https://www.landwirtschaft.sachsen.de/Wetter09/>”
 
   - additional information
     (<https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN/devices/S021/>)
     
-      - Koordinates: 13.5363186, 51.1386678 (source: )
+      - Koordinates: 13.5363186, 51.1386678
       - Timezone: timezone “Europe/Berlin” (but data time stamp is given
         in UTC-timestamp if request is in UTC-format used in this
         package)
