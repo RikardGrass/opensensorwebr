@@ -5,7 +5,7 @@
 #'
 #' @param url the url adress (given without "/" at the end) of a specivic device to create a GET-request for the OpensSensorweb REST API character
 #' @return a json file with all available sensors for the given device
-#' @examples opensensorwebr::availablesensors("https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN, my.devices = "S034") for the API-adress "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S034"
+#' @examples opensensorwebr::availablesensors("https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN, my.devices = "S034")
 #' @import httr jsonlite
 #' @export
 availablesensors <- function(url, my.device){
@@ -80,11 +80,11 @@ hourly <- function(url = "https://api.sensoto.io/v1/organizations/open/networks/
 #' @description
 #' Provide all a dataset usefull for evapotranspiration modelling if all data are available at one station. Data required at the moment is: GlobalRadiation, Air Temperature, Relative Humidity, Windspeed, Rain
 #' Todo: make Rain optional!
-#' @param url the url of the device in form of https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN/devices/S034
+#' @param url the url of the device in form of https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S034
 #' @return a json file with all available sensors
-#' @examples availablesensors(https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN/devices/S034)
+#' @examples availablesensors(https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S034)
 #' @import httr jsonlite dplyr reshape2
-#' @example opensensorwebr::etmodeldata("https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN",my.device = "S021",my.startdate = "2024-01-01T00:00:00Z",my.interval = 100, ID.GlobRad = "Globalstrahlg_200cm",ID.AirTemp = "Lufttemp_200cm",ID.RH = "Luftfeuchtigkeit_200cm",ID.Rain = "Niederschlag",ID.Wind = "Windgeschw_250cm",file = "temp/Wetter_Coswig_",write.RData = FALSE,write.csv = FALSE)
+#' @example opensensorwebr::etmodeldata("https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN", my.device = "S021", my.startdate = "2024-01-01T00:00:00Z",my.interval = 100, ID.GlobRad = "Globalstrahlg_200cm",ID.AirTemp = "Lufttemp_200cm",ID.RH = "Luftfeuchtigkeit_200cm",ID.Rain = "Niederschlag",ID.Wind = "Windgeschw_250cm",file = "temp/Wetter_Coswig_",write.RData = FALSE,write.csv = FALSE)
 #' @export
 etmodeldata <- function(url = "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN",
                         my.device = "S021",

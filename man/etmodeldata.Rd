@@ -5,7 +5,7 @@
 \title{etmodeldata}
 \usage{
 etmodeldata(
-  url = "https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN",
+  url = "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN",
   my.device = "S021",
   my.startdate = "2015-09-18T00:00:00Z",
   my.interval = 1000,
@@ -20,7 +20,7 @@ etmodeldata(
 )
 }
 \arguments{
-\item{url}{the url of the device in form of https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN/devices/S034}
+\item{url}{the url of the device in form of https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S034}
 }
 \value{
 a json file with all available sensors
@@ -30,5 +30,5 @@ Provide all a dataset usefull for evapotranspiration modelling if all data are a
 Todo: make Rain optional!
 }
 \examples{
-availablesensors(https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN/devices/S034)
+availablesensors(https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S034)
 }

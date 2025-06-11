@@ -5,8 +5,10 @@ opensensorwebr
 
 # 1 Description
 
-This package provides access to the OpenSensorWeb-API
-(api.opensensorweb.de) to create data sets for crop modelling.
+This package provides access to the Sensoto-API
+(<https://api.sensoto.io/v1/>) to create data sets for crop modelling.
+The OpenSensorWeb-API (api.opensensorweb.de) is now deprecated
+(11.6.2025)
 
 # 2 Usage
 
@@ -41,24 +43,22 @@ library(opensensorwebr)
 ## 2.3 Get a listing of available sensors
 
 ``` r
-opensensorwebr::availablesensors("https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN", my.device = "S034")
+opensensorwebr::availablesensors("https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN", my.device = "S034")
 ```
 
 ## 2.4 Get data for one sensor
 
 ``` r
-opensensorwebr::hourly(url = "https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN", my.device = "S021", my.sensor = "Niederschlag", aggregation = "MEAN", my.interval = 1000, my.startdate = "2015-09-18T00:00:00Z")
+opensensorwebr::hourly(url = "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN", my.device = "S021", my.sensor = "Niederschlag", aggregation = "MEAN", my.interval = 1000, my.startdate = "2015-09-18T00:00:00Z")
 ```
 
 ## 2.5 Get a dataset to calculate evaportranspiration according to Penman Monteight
 
-  - Todo: insert functionality to transform wind speed measured in 2.5m
-    into 2m
-
-<!-- end list -->
+- Todo: insert functionality to transform wind speed measured in 2.5m
+  into 2m
 
 ``` r
-coswig <- opensensorwebr::etmodeldata("https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN",
+coswig <- opensensorwebr::etmodeldata("https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN",
                                       my.device = "S021",
                                       my.startdate = "2024-01-01T00:00:00Z",
                                       my.interval = 100,

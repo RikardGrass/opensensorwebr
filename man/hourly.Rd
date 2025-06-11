@@ -5,7 +5,7 @@
 \title{hourly}
 \usage{
 hourly(
-  url = "https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN/devices",
+  url = "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices",
   my.device,
   my.sensor,
   my.interval = 1000,
@@ -36,5 +36,5 @@ OpenSensorWeb provides data in UTC-Timeformat. If TimeExtent is providet in the 
 requests might also be defined using intervals (e.g. 2002-09-12T12:00Z/2002-12-12T12:00Z/PT1H (time-based multi-interval, UTC)) but this is not implemented in this package.
 }
 \examples{
-hourly(url = "https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN", my.device = "S021", my.sensor = "Niederschlag", aggregation = "MEAN", my.interval = 1000, my.startdate = "2015-09-18T00:00:00Z")
+hourly(url = "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN", my.device = "S021", my.sensor = "Niederschlag", aggregation = "MEAN", my.interval = 1000, my.startdate = "2015-09-18T00:00:00Z")
 }
