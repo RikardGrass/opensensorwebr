@@ -43,7 +43,7 @@ library(plotly) # interactive plots (optional)
 
 ## Description of the Station
 - The Station ist situated in Coswig and maintained by Agrarmeteorologisches Messnetz Sachsen (AMMS). 
-- Measurment url is similar to: "https://api.opensensorweb.de/v1/organizations/pikobytes/networks/AMMS_WETTERDATEN/devices/S021/sensors/Luftfeuchtigkeit_200cm/measurements"
+- Measurment url is similar to: "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S021/sensors/Luftfeuchtigkeit_200cm/measurements"
 
 - Data Source (copied from https://www.opensensorweb.de)
     - source_shortname:"Agrarmeteorologisches Messnetz Sachsen (AMMS) - Wetterdaten",
@@ -51,12 +51,12 @@ library(plotly) # interactive plots (optional)
     - Legal information: https://www.umwelt.sachsen.de/umwelt/download/Nutzungshinweis_2012.pdf"
     - source_link_uri:"https://www.landwirtschaft.sachsen.de/Wetter09/"
 
-- additional information (https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN/devices/S021/)
+- additional information (https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S021/)
     - Koordinates: 13.5363186, 51.1386678
     - Timezone: timezone	"Europe/Berlin" (but data time stamp is given in UTC-timestamp if request is in UTC-format used in this package)
 
 ```{r, eval = TRUE}
-coswig <- opensensorwebr::etmodeldata("https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN",
+coswig <- opensensorwebr::etmodeldata("https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN",
                                       my.device = "S021",
                                       my.startdate = "2024-01-01T00:00:00Z",
                                       my.interval = 8760,

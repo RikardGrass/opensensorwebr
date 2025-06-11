@@ -5,7 +5,7 @@
 #'
 #' @param url the url adress (given without "/" at the end) of a specivic device to create a GET-request for the OpensSensorweb REST API character
 #' @return a json file with all available sensors for the given device
-#' @examples opensensorwebr::availablesensors("https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN, my.devices = "S034") for the API-adress "https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN/devices/S034"
+#' @examples opensensorwebr::availablesensors("https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN, my.devices = "S034") for the API-adress "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S034"
 #' @import httr jsonlite
 #' @export
 availablesensors <- function(url, my.device){
@@ -38,9 +38,9 @@ availablesensors <- function(url, my.device){
 #' @param aggregation how data shall be agregated ("MEAN","SUM")
 #' @return a json file with all available sensors
 #' @import httr jsonlite dplyr
-#' @examples hourly(url = "https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN", my.device = "S021", my.sensor = "Niederschlag", aggregation = "MEAN", my.interval = 1000, my.startdate = "2015-09-18T00:00:00Z")
+#' @examples hourly(url = "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN", my.device = "S021", my.sensor = "Niederschlag", aggregation = "MEAN", my.interval = 1000, my.startdate = "2015-09-18T00:00:00Z")
 #' @export
-hourly <- function(url = "https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN/devices",
+hourly <- function(url = "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices",
                                 my.device,
                                 my.sensor,
                                 my.interval = 1000,
@@ -54,7 +54,7 @@ hourly <- function(url = "https://api.opensensorweb.de/v0/networks/AMMS_WETTERDA
                    "&interpolator=LINEAR&includeLatest=true")
 
   # template for a request using fixed time interval
-  # request <- paste("https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN/devices/",my.device,"/sensors/",my.sensor,
+  # request <- paste("https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/",my.device,"/sensors/",my.sensor,
   #                  "/measurements/raw?start=2018-08-31T05:00:00.000Z&end=2018-09-01T06:00:00.000Z&timeFormat=interval", sep = "")
 
   res   <- httr::GET(url = request)
@@ -86,7 +86,7 @@ hourly <- function(url = "https://api.opensensorweb.de/v0/networks/AMMS_WETTERDA
 #' @import httr jsonlite dplyr reshape2
 #' @example opensensorwebr::etmodeldata("https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN",my.device = "S021",my.startdate = "2024-01-01T00:00:00Z",my.interval = 100, ID.GlobRad = "Globalstrahlg_200cm",ID.AirTemp = "Lufttemp_200cm",ID.RH = "Luftfeuchtigkeit_200cm",ID.Rain = "Niederschlag",ID.Wind = "Windgeschw_250cm",file = "temp/Wetter_Coswig_",write.RData = FALSE,write.csv = FALSE)
 #' @export
-etmodeldata <- function(url = "https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN",
+etmodeldata <- function(url = "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN",
                         my.device = "S021",
                         my.startdate = "2015-09-18T00:00:00Z",
                         my.interval = 1000,
@@ -150,13 +150,13 @@ etmodeldata <- function(url = "https://api.opensensorweb.de/v0/networks/AMMS_WET
 ##'
 ##' #@description
 ##' #This function shows all available sensors for a specific device on open sensor web
-##' #' @param url the url of the device in form of https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN/devices/S034
+##' #' @param url the url of the device in form of https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S034
 ##' #' @return a json file with all available sensors
-##' #' @examples availablesensors(https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN/devices/S034)
+##' #' @examples availablesensors(https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S034)
 ##' #' @import httr jsonlite dplyr reshape2
 ##' #' @example etmodeldata(file = "temp/Wetter_Coswig_", write.RData = TRUE)
 ##' #' @export
-# etmodeldata <- function(url = "https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN",
+# etmodeldata <- function(url = "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN",
 #                         my.device = "S021",
 #                         my.startdate = "2015-09-18T00:00:00Z",
 #                         my.interval = 1000,

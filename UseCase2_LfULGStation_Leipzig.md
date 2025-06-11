@@ -32,16 +32,14 @@ library(plotly) # interactive plots (optional)
 
 # 3 Get a dataset to calculate evaportranspiration according to Penman Monteight - For another station
 
-  - Todo: insert functionality to transform wind speed measured in 2.5m
-    into 2m
-
-<!-- end list -->
+- Todo: insert functionality to transform wind speed measured in 2.5m
+  into 2m
 
 ``` r
 ## List Available Sensors
-opensensorwebr::availablesensors("https://api.opensensorweb.de/v1/organizations/pikobytes/networks/LUFTGUETE_LFULG", my.device = "DESN025")
+opensensorwebr::availablesensors("https://api.sensoto.io/v1/organizations/open/networks/LUFTGUETE_LFULG", my.device = "DESN025")
 
-leipzig <- opensensorwebr::etmodeldata("https://api.opensensorweb.de/v1/organizations/pikobytes/networks/LUFTGUETE_LFULG",
+leipzig <- opensensorwebr::etmodeldata("https://api.sensoto.io/v1/organizations/open/networks/LUFTGUETE_LFULG",
                                       my.device = "DESN025",
                                       my.startdate = "2024-01-01T00:00:00Z",
                                       my.interval = 8760,
@@ -57,12 +55,10 @@ leipzig <- opensensorwebr::etmodeldata("https://api.opensensorweb.de/v1/organiza
 
 ## 3.1 Calculate Penman Monteight grass reference evaporation based on OpenSensorWeb-Data
 
-  - The Package Evapotranspiration is developed by Danlu Guo and Seth
-    Westra (Year First Available: 2014, E-mail:
-    <Danlu.guo@adelaide.edu.au>, Website:
-    <http://cran.r-project.org/web/packages/Evapotranspiration/index.html>)
-
-<!-- end list -->
+- The Package Evapotranspiration is developed by Danlu Guo and Seth
+  Westra (Year First Available: 2014, E-mail:
+  <Danlu.guo@adelaide.edu.au>, Website:
+  <http://cran.r-project.org/web/packages/Evapotranspiration/index.html>)
 
 ``` r
 # preprocess data for the package

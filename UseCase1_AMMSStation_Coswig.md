@@ -30,38 +30,35 @@ library(ggplot2) # ploting data
 library(plotly) # interactive plots (optional)
 ```
 
-# 3 Get a dataset to calculate evaportranspiration according to Penman Monteight - Weather station of “Agrarmeteorologisches Messnetz Sachsen (AMMS)” in Coswig"
+# 3 Get a dataset to calculate evaportranspiration according to Penman Monteight - Weather station of “Agrarmeteorologisches Messnetz Sachsen (AMMS)” in Coswig”
 
 ## 3.1 Description of the Station
 
-  - The Station ist situated in Coswig and maintained by
-    Agrarmeteorologisches Messnetz Sachsen (AMMS).
+- The Station ist situated in Coswig and maintained by
+  Agrarmeteorologisches Messnetz Sachsen (AMMS).
 
-  - Measurment url is similar to:
-    “<https://api.opensensorweb.de/v1/organizations/pikobytes/networks/AMMS_WETTERDATEN/devices/S021/sensors/Luftfeuchtigkeit_200cm/measurements>”
+- Measurment url is similar to:
+  “<https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S021/sensors/Luftfeuchtigkeit_200cm/measurements>”
 
-  - Data Source (copied from <https://www.opensensorweb.de>)
-    
-      - source\_shortname:“Agrarmeteorologisches Messnetz Sachsen (AMMS)
-        - Wetterdaten”,
-      - citation\_statement:"Data provided by: Sächsisches Landesamt für
-        Umwelt, Landwirtschaft und Geologie.
-      - Legal information:
-        <https://www.umwelt.sachsen.de/umwelt/download/Nutzungshinweis_2012.pdf>"
-      - source\_link\_uri:“<https://www.landwirtschaft.sachsen.de/Wetter09/>”
+- Data Source (copied from <https://www.opensensorweb.de>)
 
-  - additional information
-    (<https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN/devices/S021/>)
-    
-      - Koordinates: 13.5363186, 51.1386678
-      - Timezone: timezone “Europe/Berlin” (but data time stamp is given
-        in UTC-timestamp if request is in UTC-format used in this
-        package)
+  - source_shortname:“Agrarmeteorologisches Messnetz Sachsen (AMMS) -
+    Wetterdaten”,
+  - citation_statement:“Data provided by: Sächsisches Landesamt für
+    Umwelt, Landwirtschaft und Geologie.
+  - Legal information:
+    <https://www.umwelt.sachsen.de/umwelt/download/Nutzungshinweis_2012.pdf>”
+  - source_link_uri:“<https://www.landwirtschaft.sachsen.de/Wetter09/>”
 
-<!-- end list -->
+- additional information
+  (<https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S021/>)
+
+  - Koordinates: 13.5363186, 51.1386678
+  - Timezone: timezone “Europe/Berlin” (but data time stamp is given in
+    UTC-timestamp if request is in UTC-format used in this package)
 
 ``` r
-coswig <- opensensorwebr::etmodeldata("https://api.opensensorweb.de/v0/networks/AMMS_WETTERDATEN",
+coswig <- opensensorwebr::etmodeldata("https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN",
                                       my.device = "S021",
                                       my.startdate = "2024-01-01T00:00:00Z",
                                       my.interval = 8760,
@@ -77,12 +74,10 @@ coswig <- opensensorwebr::etmodeldata("https://api.opensensorweb.de/v0/networks/
 
 ## 3.2 Calculate Penman Monteight grass reference evaporation based on OpenSensorWeb-Data
 
-  - The Package Evapotranspiration is developed by Danlu Guo and Seth
-    Westra (Year First Available: 2014, E-mail:
-    <Danlu.guo@adelaide.edu.au>, Website:
-    <http://cran.r-project.org/web/packages/Evapotranspiration/index.html>)
-
-<!-- end list -->
+- The Package Evapotranspiration is developed by Danlu Guo and Seth
+  Westra (Year First Available: 2014, E-mail:
+  <Danlu.guo@adelaide.edu.au>, Website:
+  <http://cran.r-project.org/web/packages/Evapotranspiration/index.html>)
 
 ``` r
 # preprocess data for the package

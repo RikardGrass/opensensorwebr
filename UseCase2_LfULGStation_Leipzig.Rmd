@@ -45,9 +45,9 @@ library(plotly) # interactive plots (optional)
 
 ```{r, eval = TRUE}
 ## List Available Sensors
-opensensorwebr::availablesensors("https://api.opensensorweb.de/v1/organizations/pikobytes/networks/LUFTGUETE_LFULG", my.device = "DESN025")
+opensensorwebr::availablesensors("https://api.sensoto.io/v1/organizations/open/networks/LUFTGUETE_LFULG", my.device = "DESN025")
 
-leipzig <- opensensorwebr::etmodeldata("https://api.opensensorweb.de/v1/organizations/pikobytes/networks/LUFTGUETE_LFULG",
+leipzig <- opensensorwebr::etmodeldata("https://api.sensoto.io/v1/organizations/open/networks/LUFTGUETE_LFULG",
                                       my.device = "DESN025",
                                       my.startdate = "2024-01-01T00:00:00Z",
                                       my.interval = 8760,
