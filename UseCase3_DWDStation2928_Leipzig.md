@@ -1,0 +1,49 @@
+use case 3 - DWD -Station in Leipzig Holzhausen (DWD Station 2928, one
+variable not available)
+================
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# 1 Introduction
+
+This use case shows the possibility to calculate evapotranspiration (ET)
+for a specific weather station available on OpenSensorWeb. It implements
+the Penman-Monteith formulation as realized in Evapotranspiration
+Package in R (including the method for FAO-56 hypothetical short grass
+and the method for ASCE-EWRI Standardised crop) for estimating reference
+crop evapotranspiration
+(<https://search.r-project.org/CRAN/refmans/Evapotranspiration/html/ET.PenmanMonteith.html>).
+An alternative to calculate ET would be calculations using Big Leaf
+Package: <https://cran.r-project.org/web/packages/bigleaf/bigleaf.pdf>
+To adapt the calculations to a specific
+
+# 2 Install and load package
+
+``` r
+library(opensensorwebr)
+library(lubridate) # lubridate for date transformations
+library(tidyverse) # tidyverse for tidy data wrangling
+```
+
+# 3 Get a dataset to calculate evaportranspiration according to Penman Monteight - For another station
+
+``` r
+## List Available Sensors
+opensensorwebr::availablesensors("https://api.sensoto.io/v1/organizations/open/networks/DWD", my.device = "2928")
+
+leipzig <- opensensorwebr::etmodeldata("https://api.sensoto.io/v1/organizations/open/networks/DWD",
+                                      my.device = "2928",
+                                      my.startdate = "2024-01-01T00:00:00Z",
+                                      my.interval = 8760,
+                                      ID.GlobRad = "PP_10", # not ok, no data since 2010 --> take some other value to create the table --> I took Air Pressure as a dummy
+                                      ID.AirTemp = "TT_10", # ok, Air Temperature in 2m height
+                                      ID.RH = "RF_10", # ok
+                                      ID.Rain = "RWS_10", # ok
+                                      ID.Wind = "FF_10", # Wind speed over 10 Minutes (Mean)
+                                      file = "temp/Wetter_Leipzig_DWD2928",
+                                      write.RData = FALSE,
+                                      write.csv = FALSE)
+
+#View(leipzig)
+head(leipzig)
+```

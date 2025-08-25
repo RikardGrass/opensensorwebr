@@ -35,8 +35,6 @@ library(tidyverse) # tidyverse for tidy data wrangling
 
 # Get a dataset to calculate evaportranspiration according to Penman Monteight - For another station
 
-- Todo: insert functionality to transform wind speed measured in 2.5m into 2m
-
 ```{r, eval = TRUE}
 ## List Available Sensors
 opensensorwebr::availablesensors("https://api.sensoto.io/v1/organizations/open/networks/DWD", my.device = "2928")
