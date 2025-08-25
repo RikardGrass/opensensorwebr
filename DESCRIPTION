@@ -1,16 +1,23 @@
+Type: Package
 Package: opensensorwebr
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: OpensensorwebR a library to access data from Sensoto (formerly opensensorweb) platform via R libraries.
+Version: 0.1.0
 Authors@R: 
-    person(given = "First",
-           family = "Last",
-           role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Rikard", "Grass", , "rikard.grass@ufz.de", role = c("aut", "cre"))
+Description: This package offers functions to access the the sensoto platform.
+License: GPL-3 + file LICENSE
+Imports: 
+    httr,
+    jsonlite,
+    dplyr,
+    reshape2,
+    lubridate,
+    Evapotranspiration,
+    tidyverse,
+    ggplot2,
+    plotly
 Encoding: UTF-8
-LazyData: true
-Roxygen: list(markdown = TRUE)
+LazyData: false
 RoxygenNote: 7.3.2
+Depends: 
+    R (>= 3.5)

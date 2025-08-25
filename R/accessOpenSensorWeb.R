@@ -5,7 +5,7 @@
 #'
 #' @param url the url adress (given without "/" at the end) of a specivic device to create a GET-request for the OpensSensorweb REST API character
 #' @return a json file with all available sensors for the given device
-#' @examples opensensorwebr::availablesensors("https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN, my.devices = "S034")
+#' @examples opensensorwebr::availablesensors("https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN", my.devices = "S034")
 #' @import httr jsonlite
 #' @export
 availablesensors <- function(url, my.device){

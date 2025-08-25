@@ -15,3 +15,6 @@ a json file with all available sensors for the given device
 \description{
 This function lists all available sensors for a specific device on open sensor web
 }
+\examples{
+opensensorwebr::availablesensors("https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN", my.devices = "S034")
+}
