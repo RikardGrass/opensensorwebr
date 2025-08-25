@@ -10,7 +10,6 @@ Imports:
     httr,
     jsonlite,
     dplyr,
-    reshape2,
     lubridate,
     Evapotranspiration,
     tidyverse,

@@ -20,15 +20,59 @@ etmodeldata(
 )
 }
 \arguments{
-\item{url}{the url of the device in form of https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S034}
+\item{url}{The base URL of the device, e.g. "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S034"}
+
+\item{my.device}{Device ID (e.g. "S021")}
+
+\item{my.startdate}{Start date-time in ISO format}
+
+\item{my.interval}{Interval for data aggregation}
+
+\item{ID.GlobRad}{Sensor ID for global radiation}
+
+\item{ID.AirTemp}{Sensor ID for air temperature}
+
+\item{ID.RH}{Sensor ID for relative humidity}
+
+\item{ID.Rain}{Sensor ID for precipitation}
+
+\item{ID.Wind}{Sensor ID for windspeed}
+
+\item{file}{Path prefix for output files}
+
+\item{write.RData}{Logical, whether to save .RData}
+
+\item{write.csv}{Logical, whether to save .csv}
 }
 \value{
-a json file with all available sensors
+A json file with all available sensors
+
+A data frame of all chosen sensor data.
 }
 \description{
 Provide all a dataset usefull for evapotranspiration modelling if all data are available at one station. Data required at the moment is: GlobalRadiation, Air Temperature, Relative Humidity, Windspeed, Rain
 Todo: make Rain optional!
+
+Provide a dataset useful for evapotranspiration modelling if all data are available at one station.
+Required at the moment: Global Radiation, Air Temperature, Relative Humidity, Windspeed, Rain.
+
+!! if one parameter is not available, please use another parameter as a dummy which is not in the list at the moment !!
 }
 \examples{
-availablesensors(https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S034)
+opensensorwebr::etmodeldata("https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN", my.device = "S021", my.startdate = "2024-01-01T00:00:00Z",my.interval = 100, ID.GlobRad = "Globalstrahlg_200cm",ID.AirTemp = "Lufttemp_200cm",ID.RH = "Luftfeuchtigkeit_200cm",ID.Rain = "Niederschlag",ID.Wind = "Windgeschw_250cm",file = "temp/Wetter_Coswig_",write.RData = FALSE,write.csv = FALSE)
+opensensorwebr::etmodeldata(
+  url = "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN",
+  my.device = "S021",
+  my.startdate = "2024-01-01T00:00:00Z",
+  my.interval = 100,
+  ID.GlobRad = "Globalstrahlg_200cm",
+  ID.AirTemp = "Lufttemp_200cm",
+  ID.RH = "Luftfeuchtigkeit_200cm",
+  ID.Rain = "Niederschlag",
+  ID.Wind = "Windgeschw_250cm",
+  file = "temp/Wetter_Coswig_",
+  write.RData = FALSE,
+  write.csv = FALSE
+)
+
 }

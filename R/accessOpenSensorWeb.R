@@ -58,7 +58,9 @@ hourly <- function(url = "https://api.sensoto.io/v1/organizations/open/networks/
   #                  "/measurements/raw?start=2018-08-31T05:00:00.000Z&end=2018-09-01T06:00:00.000Z&timeFormat=interval", sep = "")
 
   res   <- httr::GET(url = request)
-  data  <- jsonlite::fromJSON(httr::content(res, "text"))
+  #data  <- jsonlite::fromJSON(httr::content(res, "text"))
+  data  <- jsonlite::fromJSON(httr::content(res, "text", encoding = "UTF-8"))
+
 
   # set timezone and data format
   data$date <- strptime(data$end, format="%Y-%m-%dT%H:%MZ", tz="UTC")  # Reference for hourly data: "end"; for daily data possibly "begin" recomended
@@ -68,7 +70,7 @@ hourly <- function(url = "https://api.sensoto.io/v1/organizations/open/networks/
     dplyr::arrange(date) %>%
     dplyr::mutate(sensor = my.sensor)
 
-  print("returning data in UTC Time format")
+  print("Information: returning data in UTC Time format")
   return(data)
 }
 
@@ -81,10 +83,54 @@ hourly <- function(url = "https://api.sensoto.io/v1/organizations/open/networks/
 #' Provide all a dataset usefull for evapotranspiration modelling if all data are available at one station. Data required at the moment is: GlobalRadiation, Air Temperature, Relative Humidity, Windspeed, Rain
 #' Todo: make Rain optional!
 #' @param url the url of the device in form of https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S034
-#' @return a json file with all available sensors
-#' @examples availablesensors(https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S034)
+#' @return A json file with all available sensors
 #' @import httr jsonlite dplyr reshape2
-#' @example opensensorwebr::etmodeldata("https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN", my.device = "S021", my.startdate = "2024-01-01T00:00:00Z",my.interval = 100, ID.GlobRad = "Globalstrahlg_200cm",ID.AirTemp = "Lufttemp_200cm",ID.RH = "Luftfeuchtigkeit_200cm",ID.Rain = "Niederschlag",ID.Wind = "Windgeschw_250cm",file = "temp/Wetter_Coswig_",write.RData = FALSE,write.csv = FALSE)
+#' @examples opensensorwebr::etmodeldata("https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN", my.device = "S021", my.startdate = "2024-01-01T00:00:00Z",my.interval = 100, ID.GlobRad = "Globalstrahlg_200cm",ID.AirTemp = "Lufttemp_200cm",ID.RH = "Luftfeuchtigkeit_200cm",ID.Rain = "Niederschlag",ID.Wind = "Windgeschw_250cm",file = "temp/Wetter_Coswig_",write.RData = FALSE,write.csv = FALSE)
+#' @export
+#'
+#'
+#'
+#'
+#' etmodeldata
+#'
+#' @description
+#' Provide a dataset useful for evapotranspiration modelling if all data are available at one station.
+#' Required at the moment: Global Radiation, Air Temperature, Relative Humidity, Windspeed, Rain.
+#'
+#' !! if one parameter is not available, please use another parameter as a dummy which is not in the list at the moment !!
+#'
+#' @param url The base URL of the device, e.g. "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S034"
+#' @param my.device Device ID (e.g. "S021")
+#' @param my.startdate Start date-time in ISO format
+#' @param my.interval Interval for data aggregation
+#' @param ID.GlobRad Sensor ID for global radiation
+#' @param ID.AirTemp Sensor ID for air temperature
+#' @param ID.RH Sensor ID for relative humidity
+#' @param ID.Rain Sensor ID for precipitation
+#' @param ID.Wind Sensor ID for windspeed
+#' @param file Path prefix for output files
+#' @param write.RData Logical, whether to save .RData
+#' @param write.csv Logical, whether to save .csv
+#'
+#' @return A data frame of all chosen sensor data.
+#'
+#' @examples
+#' opensensorwebr::etmodeldata(
+#'   url = "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN",
+#'   my.device = "S021",
+#'   my.startdate = "2024-01-01T00:00:00Z",
+#'   my.interval = 100,
+#'   ID.GlobRad = "Globalstrahlg_200cm",
+#'   ID.AirTemp = "Lufttemp_200cm",
+#'   ID.RH = "Luftfeuchtigkeit_200cm",
+#'   ID.Rain = "Niederschlag",
+#'   ID.Wind = "Windgeschw_250cm",
+#'   file = "temp/Wetter_Coswig_",
+#'   write.RData = FALSE,
+#'   write.csv = FALSE
+#' )
+#'
+#' @import httr jsonlite dplyr
 #' @export
 etmodeldata <- function(url = "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN",
                         my.device = "S021",
@@ -123,10 +169,28 @@ etmodeldata <- function(url = "https://api.sensoto.io/v1/organizations/open/netw
                   sensor = ifelse(sensor == ID.Wind, "wind2m", sensor)
     )
 
-  # transform long table to short form (flatfile-format to table)
-  weather <- reshape2::dcast(weather %>% dplyr::select(date,sensor,v), formula = date ~ sensor) #vs. melt
+  # # transform long table to short form (flatfile-format to table)
+  # # weather <- reshape2::dcast(weather %>% dplyr::select(date,sensor,v), formula = date ~ sensor) #vs. melt
+  # weather_wide <- reshape2::dcast(
+  #   weather %>% select(date, sensor, v),
+  #   date ~ sensor,
+  #   value.var = "v",
+  #   fun.aggregate = mean   # or sum, max, identity, etc.
+  # )
+
+  # since 28.8.2025 using tidyr::pivot_wider()
+  # if (date, sensor) is unique → you’ll just get the value, no aggregation needed.
+  # if it’s not unique → you’ll get a warning and can then decide how to handle duplicates.
+  weather <- weather %>%
+    select(date, sensor, v) %>%
+    pivot_wider(
+      names_from = sensor,
+      values_from = v
+    )
+  weather <- as.data.frame(weather)
+
   print(head(weather))
-  print("returning data in UTC Time format")
+  print("Information: returning data in UTC Time format")
 
   # export data
   if (write.RData == TRUE){
@@ -153,7 +217,7 @@ etmodeldata <- function(url = "https://api.sensoto.io/v1/organizations/open/netw
 ##' #' @param url the url of the device in form of https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S034
 ##' #' @return a json file with all available sensors
 ##' #' @examples availablesensors(https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN/devices/S034)
-##' #' @import httr jsonlite dplyr reshape2
+##' #' @import httr jsonlite dplyr
 ##' #' @example etmodeldata(file = "temp/Wetter_Coswig_", write.RData = TRUE)
 ##' #' @export
 # etmodeldata <- function(url = "https://api.sensoto.io/v1/organizations/open/networks/AMMS_WETTERDATEN",
